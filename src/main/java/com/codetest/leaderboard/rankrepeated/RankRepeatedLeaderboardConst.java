@@ -12,9 +12,16 @@ public class RankRepeatedLeaderboardConst {
     }
 
     /**
-     * 获取分数存储key
+     * 获取分数排名存储key
      */
     public static String scoreRankingKey() {
-        return REDIS_KEY_PREFIX;
+        return REDIS_KEY_PREFIX + "Score";
+    }
+
+    /**
+     * 获取分数出现频率存储key
+     */
+    public static String scoreCountKey() {
+        return REDIS_KEY_PREFIX + "ScoreCount";
     }
 }

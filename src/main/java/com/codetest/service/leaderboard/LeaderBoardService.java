@@ -1,4 +1,4 @@
-package com.codetest.service;
+package com.codetest.service.leaderboard;
 
 import com.codetest.leaderboard.RankInfo;
 

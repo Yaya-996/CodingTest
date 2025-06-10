@@ -1,10 +1,9 @@
-package com.codetest.service.impl;
+package com.codetest.service.leaderboard;
 
 import com.codetest.leaderboard.custom.LeaderboardConst;
 import com.codetest.leaderboard.custom.LeaderboardHelper;
 import com.codetest.leaderboard.RankInfo;
 import com.codetest.leaderboard.RedisUtil;
-import com.codetest.service.LeaderBoardService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.resps.Tuple;
 import redis.clients.jedis.util.KeyValue;

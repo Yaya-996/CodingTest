@@ -1,17 +1,12 @@
-package com.codetest.service.impl;
+package com.codetest.service.leaderboard;
 
-import com.codetest.leaderboard.custom.LeaderboardConst;
 import com.codetest.leaderboard.custom.LeaderboardHelper;
 import com.codetest.leaderboard.RankInfo;
 import com.codetest.leaderboard.RedisUtil;
 import com.codetest.leaderboard.rankrepeated.RankRepeatedLeaderboardConst;
 import com.codetest.leaderboard.rankrepeated.RankRepeatedLeaderboardHelper;
-import com.codetest.service.LeaderBoardService;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.resps.Tuple;
-import redis.clients.jedis.util.KeyValue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RankRepeatedLeaderboardServiceImpl implements LeaderBoardService {
@@ -22,7 +17,8 @@ public class RankRepeatedLeaderboardServiceImpl implements LeaderBoardService {
         RankRepeatedLeaderboardHelper.updateScore(REDIS,
                 List.of(
                         RankRepeatedLeaderboardConst.rankingKey(),
-                        RankRepeatedLeaderboardConst.scoreRankingKey()
+                        RankRepeatedLeaderboardConst.scoreRankingKey(),
+                        RankRepeatedLeaderboardConst.scoreCountKey()
                 ),
                 playerId,
                 LeaderboardHelper.scoreParse(score, timestamp));
@@ -30,19 +26,25 @@ public class RankRepeatedLeaderboardServiceImpl implements LeaderBoardService {
 
     @Override
     public RankInfo getPlayerRank(String playerId) {
-        // TODO
-        return null;
+        return RankRepeatedLeaderboardHelper.fetchRank(REDIS, List.of(
+                RankRepeatedLeaderboardConst.rankingKey(),
+                RankRepeatedLeaderboardConst.scoreRankingKey()
+        ), playerId);
     }
 
     @Override
     public List<RankInfo> getTopN(int n) {
-        // TODO
-        return null;
+        return RankRepeatedLeaderboardHelper.fetchTop(REDIS, List.of(
+                RankRepeatedLeaderboardConst.rankingKey(),
+                RankRepeatedLeaderboardConst.scoreRankingKey()
+        ), n);
     }
 
     @Override
     public List<RankInfo> getPlayerRankRange(String playerId, int n) {
-        // TODO
-        return null;
+        return RankRepeatedLeaderboardHelper.fetchAround(REDIS, List.of(
+                RankRepeatedLeaderboardConst.rankingKey(),
+                RankRepeatedLeaderboardConst.scoreRankingKey()
+        ), playerId, n);
     }
 }
